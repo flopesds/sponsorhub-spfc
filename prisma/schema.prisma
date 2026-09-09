@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Sponsor {
+  id        String     @id @default(cuid())
+  nome      String
+  categoria String
+  nivelCota String
+  contato   String
+  email     String
+  telefone  String?
+  createdAt DateTime   @default(now())
+  contracts Contract[]
+}
+
+model Contract {
+  id         String        @id @default(cuid())
+  sponsorId  String
+  sponsor    Sponsor       @relation(fields: [sponsorId], references: [id], onDelete: Cascade)
+  valor      Float
+  dataInicio DateTime
+  dataFim    DateTime
+  status     String        @default("ATIVO")
+  deliverables Deliverable[]
+  createdAt  DateTime      @default(now())
+}
+
+model Deliverable {
+  id             String   @id @default(cuid())
+  contractId     String
+  contract       Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
+  descricao      String
+  tipo           String
+  prazo          DateTime
+  status         String   @default("PENDENTE")
+  comprovanteUrl String?
+  createdAt      DateTime @default(now())
+}
+
+model User {
+  id        String   @id @default(cuid())
+  nome      String
+  email     String   @unique
+  senhaHash String
+  papel     String   @default("GESTOR")
+  createdAt DateTime @default(now())
+}
