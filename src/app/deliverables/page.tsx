@@ -5,6 +5,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ExternalLink, CheckCircle2, Clock, AlertTriangle, PlayCircle } from 'lucide-react'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: 'Gestão de Contrapartidas | SponsorHub SPFC',
   description: 'Acompanhamento de entregas, ativações e contrapartidas contratuais do São Paulo FC.',

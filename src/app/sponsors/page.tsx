@@ -3,6 +3,13 @@ import { SponsorActions } from '@/components/SponsorActions'
 import Image from 'next/image'
 import Link from 'next/link'
 
+export const dynamic = 'force-dynamic'
+
+export const metadata = {
+  title: 'Gestão de Patrocinadores | SponsorHub SPFC',
+  description: 'Cadastro e gestão de marcas parceiras e cotas do São Paulo FC.',
+}
+
 export default async function SponsorsPage() {
   const sponsors = await getSponsors()
 

@@ -4,6 +4,8 @@ import { ContractActions } from '@/components/ContractActions'
 import Image from 'next/image'
 import Link from 'next/link'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: 'Gestão de Contratos | SponsorHub SPFC',
   description: 'Controle de acordos comerciais, valores e vigência de patrocínios do São Paulo FC.',
