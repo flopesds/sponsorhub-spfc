@@ -21,6 +21,11 @@ export async function createSponsor(formData: FormData) {
     throw new Error('Preencha os campos obrigatórios.')
   }
 
+  if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
+    console.warn("Tentativa de gravação bloqueada em modo de demonstração.");
+    return;
+  }
+
   await prisma.sponsor.create({
     data: {
       nome,

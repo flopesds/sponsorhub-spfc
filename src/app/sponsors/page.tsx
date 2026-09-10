@@ -11,6 +11,7 @@ export const metadata = {
 }
 
 export default async function SponsorsPage() {
+  const isDemo = process.env.NEXT_PUBLIC_DEMO_MODE === 'true';
   const sponsors = await getSponsors()
 
   return (
@@ -102,24 +103,10 @@ export default async function SponsorsPage() {
             <div style={{ gridColumn: '1 / -1', marginTop: '8px' }}>
               <button
                 type="submit"
-                style={{
-                  backgroundColor: '#D71920',
-                  color: '#FFFFFF',
-                  border: 'none',
-                  borderRadius: '8px',
-                  padding: '12px 24px',
-                  fontWeight: 700,
-                  fontSize: '13px',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.6px',
-                  cursor: 'pointer',
-                  transition: 'background 0.2s',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px'
-                }}
+                disabled={isDemo}
+                className={isDemo ? "bg-neutral-800 text-neutral-500 cursor-not-allowed py-2 px-6 rounded" : "bg-red-600 text-white py-2 px-6 rounded"}
               >
-                Cadastrar Parceiro
+                {isDemo ? "Demonstração (Somente Leitura)" : "Cadastrar Parceiro"}
               </button>
             </div>
           </form>

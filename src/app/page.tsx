@@ -804,17 +804,17 @@ export default async function DashboardPage() {
                               textTransform: "uppercase",
                               backgroundColor:
                                 item.contract.sponsor.nivelCota === "Master" ||
-                                item.contract.sponsor.nivelCota === "Naming Rights"
+                                  item.contract.sponsor.nivelCota === "Naming Rights"
                                   ? "rgba(215, 25, 32, 0.15)"
                                   : "#1A2026",
                               color:
                                 item.contract.sponsor.nivelCota === "Master" ||
-                                item.contract.sponsor.nivelCota === "Naming Rights"
+                                  item.contract.sponsor.nivelCota === "Naming Rights"
                                   ? "#D71920"
                                   : "#8A9297",
                               border:
                                 item.contract.sponsor.nivelCota === "Master" ||
-                                item.contract.sponsor.nivelCota === "Naming Rights"
+                                  item.contract.sponsor.nivelCota === "Naming Rights"
                                   ? "1px solid rgba(215, 25, 32, 0.3)"
                                   : "1px solid #283038",
                             }}

@@ -55,6 +55,11 @@ export async function createContract(formData: FormData) {
     throw new Error('Datas de início ou fim inválidas.')
   }
 
+  if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
+    console.warn("Tentativa de gravação bloqueada em modo de demonstração.");
+    return;
+  }
+
   await prisma.contract.create({
     data: {
       sponsorId,
