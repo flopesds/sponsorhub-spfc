@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { RevenueByCotaChart } from "@/components/charts/RevenueByCotaChart";
@@ -13,8 +15,6 @@ import {
   Plus,
   TrendingUp,
 } from "lucide-react";
-
-export const dynamic = 'force-dynamic'
 
 export const metadata = {
   title: "Dashboard Executivo | SponsorHub SPFC",

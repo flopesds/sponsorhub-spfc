@@ -1,10 +1,10 @@
+export const dynamic = 'force-dynamic';
+
 import { getContracts, createContract } from '@/app/actions/contracts'
 import { getSponsors } from '@/app/actions/sponsors'
 import { ContractActions } from '@/components/ContractActions'
 import Image from 'next/image'
 import Link from 'next/link'
-
-export const dynamic = 'force-dynamic'
 
 export const metadata = {
   title: 'Gestão de Contratos | SponsorHub SPFC',

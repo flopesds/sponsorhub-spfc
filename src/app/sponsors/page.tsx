@@ -1,9 +1,9 @@
+export const dynamic = 'force-dynamic';
+
 import { getSponsors, createSponsor } from '@/app/actions/sponsors'
 import { SponsorActions } from '@/components/SponsorActions'
 import Image from 'next/image'
 import Link from 'next/link'
-
-export const dynamic = 'force-dynamic'
 
 export const metadata = {
   title: 'Gestão de Patrocinadores | SponsorHub SPFC',

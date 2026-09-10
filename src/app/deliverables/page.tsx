@@ -1,11 +1,11 @@
+export const dynamic = 'force-dynamic';
+
 import { getDeliverables, createDeliverable } from '@/app/actions/deliverables'
 import { getContracts } from '@/app/actions/contracts'
 import { DeliverableActions } from '@/components/DeliverableActions'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ExternalLink, CheckCircle2, Clock, AlertTriangle, PlayCircle } from 'lucide-react'
-
-export const dynamic = 'force-dynamic'
 
 export const metadata = {
   title: 'Gestão de Contrapartidas | SponsorHub SPFC',
