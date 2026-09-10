@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic';
 import { getDeliverables, createDeliverable } from '@/app/actions/deliverables'
 import { getContracts } from '@/app/actions/contracts'
 import { DeliverableActions } from '@/components/DeliverableActions'
+import ExportExcelButton from '@/components/ExportExcelButton'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ExternalLink, CheckCircle2, Clock, AlertTriangle, PlayCircle } from 'lucide-react'
@@ -33,6 +34,23 @@ export default async function DeliverablesPage() {
   return (
     <div style={{ minHeight: '100%', backgroundColor: '#0A0D10', color: '#F3F4F6', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
       <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '32px 24px', display: 'flex', flexDirection: 'column', gap: '32px' }}>
+        {/* Cabeçalho da página com o botão de exportação */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-black uppercase text-white tracking-wide">
+              Entregas & Contrapartidas
+            </h1>
+            <p className="text-sm text-neutral-400">
+              Auditoria de entregas contratuais e geração de relatórios
+            </p>
+          </div>
+          
+          <ExportExcelButton 
+            contracts={contracts} 
+            deliverables={deliverables} 
+          />
+        </div>
+
         {/* Painel de Métricas Rápidas */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
           <div style={{ backgroundColor: '#12161B', border: '1px solid #1E2328', borderRadius: '12px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
