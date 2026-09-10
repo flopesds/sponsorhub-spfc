@@ -17,6 +17,7 @@ function formatarData(date: Date | string) {
 }
 
 export default async function DeliverablesPage() {
+  const isDemo = process.env.NEXT_PUBLIC_DEMO_MODE === 'true';
   const [deliverables, contracts] = await Promise.all([
     getDeliverables(),
     getContracts(),
@@ -189,25 +190,14 @@ export default async function DeliverablesPage() {
             <div style={{ gridColumn: '1 / -1', marginTop: '8px' }}>
               <button
                 type="submit"
-                disabled={contracts.length === 0}
-                style={{
-                  backgroundColor: contracts.length === 0 ? '#4B5563' : '#D71920',
-                  color: '#FFFFFF',
-                  border: 'none',
-                  borderRadius: '8px',
-                  padding: '12px 24px',
-                  fontWeight: 700,
-                  fontSize: '13px',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.6px',
-                  cursor: contracts.length === 0 ? 'not-allowed' : 'pointer',
-                  transition: 'background 0.2s',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                }}
+                disabled={isDemo || contracts.length === 0}
+                className={`px-6 py-2.5 rounded font-bold uppercase transition ${
+                  isDemo || contracts.length === 0
+                    ? 'bg-neutral-800 text-neutral-500 cursor-not-allowed border border-neutral-700'
+                    : 'bg-red-600 hover:bg-red-700 text-white'
+                }`}
               >
-                Cadastrar Contrapartida
+                {isDemo ? 'Demonstração (Somente Leitura)' : 'Cadastrar Contrapartida'}
               </button>
             </div>
           </form>

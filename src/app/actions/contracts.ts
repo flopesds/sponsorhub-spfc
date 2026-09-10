@@ -56,7 +56,7 @@ export async function createContract(formData: FormData) {
   }
 
   if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
-    console.warn("Tentativa de gravação bloqueada em modo de demonstração.");
+    console.warn("Ambiente em modo demonstração: criação bloqueada.");
     return;
   }
 
@@ -97,6 +97,11 @@ export async function updateContract(formData: FormData) {
   const dataInicio = parseDateUTC(dataInicioStr)
   const dataFim = parseDateUTC(dataFimStr)
 
+  if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
+    console.warn("Ambiente em modo demonstração: mutação bloqueada.");
+    return;
+  }
+
   await prisma.contract.update({
     where: { id },
     data: {
@@ -120,6 +125,11 @@ export async function deleteContract(formData: FormData) {
 
   if (!id) {
     throw new Error('ID do contrato não informado.')
+  }
+
+  if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
+    console.warn("Ambiente em modo demonstração: mutação bloqueada.");
+    return;
   }
 
   await prisma.contract.delete({

@@ -55,6 +55,11 @@ export async function createDeliverable(formData: FormData) {
     throw new Error('Prazo de entrega inválido.')
   }
 
+  if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
+    console.warn("Ambiente em modo demonstração: criação bloqueada.");
+    return;
+  }
+
   await prisma.deliverable.create({
     data: {
       contractId,
@@ -93,6 +98,11 @@ export async function updateDeliverable(formData: FormData) {
     throw new Error('Prazo de entrega inválido.')
   }
 
+  if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
+    console.warn("Ambiente em modo demonstração: mutação bloqueada.");
+    return;
+  }
+
   await prisma.deliverable.update({
     where: { id },
     data: {
@@ -118,6 +128,11 @@ export async function deleteDeliverable(formData: FormData) {
 
   if (!id) {
     throw new Error('ID da contrapartida não informado.')
+  }
+
+  if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
+    console.warn("Ambiente em modo demonstração: mutação bloqueada.");
+    return;
   }
 
   await prisma.deliverable.delete({

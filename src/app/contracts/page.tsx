@@ -16,6 +16,7 @@ function formatarData(date: Date | string) {
 }
 
 export default async function ContractsPage() {
+  const isDemo = process.env.NEXT_PUBLIC_DEMO_MODE === 'true';
   const [contracts, sponsors] = await Promise.all([
     getContracts(),
     getSponsors(),
@@ -156,24 +157,14 @@ export default async function ContractsPage() {
             <div style={{ gridColumn: '1 / -1', marginTop: '8px' }}>
               <button
                 type="submit"
-                style={{
-                  backgroundColor: '#D71920',
-                  color: '#FFFFFF',
-                  border: 'none',
-                  borderRadius: '8px',
-                  padding: '12px 24px',
-                  fontWeight: 700,
-                  fontSize: '13px',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.6px',
-                  cursor: 'pointer',
-                  transition: 'background 0.2s',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                }}
+                disabled={isDemo}
+                className={`px-6 py-2.5 rounded font-bold uppercase transition ${
+                  isDemo
+                    ? 'bg-neutral-800 text-neutral-500 cursor-not-allowed border border-neutral-700'
+                    : 'bg-red-600 hover:bg-red-700 text-white'
+                }`}
               >
-                Cadastrar Contrato
+                {isDemo ? 'Demonstração (Somente Leitura)' : 'Cadastrar Contrato'}
               </button>
             </div>
           </form>

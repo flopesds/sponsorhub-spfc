@@ -53,6 +53,11 @@ export async function updateSponsor(formData: FormData) {
     throw new Error('Dados inválidos para atualização.')
   }
 
+  if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
+    console.warn("Ambiente em modo demonstração: mutação bloqueada.");
+    return;
+  }
+
   await prisma.sponsor.update({
     where: { id },
     data: {
@@ -72,6 +77,11 @@ export async function deleteSponsor(formData: FormData) {
   const id = formData.get('id') as string
 
   if (!id) throw new Error('ID não informado.')
+
+  if (process.env.NEXT_PUBLIC_DEMO_MODE === 'true') {
+    console.warn("Ambiente em modo demonstração: mutação bloqueada.");
+    return;
+  }
 
   await prisma.sponsor.delete({
     where: { id },

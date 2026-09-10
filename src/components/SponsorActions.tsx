@@ -15,6 +15,7 @@ type Sponsor = {
 };
 
 export function SponsorActions({ sponsor }: { sponsor: Sponsor }) {
+  const isDemo = process.env.NEXT_PUBLIC_DEMO_MODE === 'true';
   const [isEditOpen, setIsEditOpen] = useState(false);
 
   return (
@@ -23,24 +24,16 @@ export function SponsorActions({ sponsor }: { sponsor: Sponsor }) {
         {/* Botão de Editar */}
         <button
           type="button"
-          onClick={() => setIsEditOpen(true)}
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "4px",
-            backgroundColor: "#1A2026",
-            border: "1px solid #283038",
-            borderRadius: "6px",
-            padding: "6px 10px",
-            color: "#E5E7EB",
-            fontSize: "11px",
-            fontWeight: 600,
-            cursor: "pointer",
-            transition: "all 0.2s",
-          }}
-          title="Editar Patrocinador"
+          onClick={() => !isDemo && setIsEditOpen(true)}
+          disabled={isDemo}
+          className={`px-3 py-1.5 rounded text-xs font-semibold flex items-center gap-1.5 transition ${
+            isDemo
+              ? 'bg-neutral-900 text-neutral-600 border border-neutral-800 cursor-not-allowed opacity-50'
+              : 'border border-neutral-700 text-neutral-300 hover:bg-neutral-800'
+          }`}
+          title={isDemo ? "Modo demonstração: edição bloqueada" : "Editar Patrocinador"}
         >
-          <Pencil size={12} color="#8A9297" />
+          <Pencil size={12} />
           <span>Editar</span>
         </button>
 
@@ -48,6 +41,10 @@ export function SponsorActions({ sponsor }: { sponsor: Sponsor }) {
         <form
           action={deleteSponsor}
           onSubmit={(e) => {
+            if (isDemo) {
+              e.preventDefault();
+              return;
+            }
             if (!confirm(`Tem certeza que deseja excluir o patrocinador "${sponsor.nome}"?`)) {
               e.preventDefault();
             }
@@ -57,23 +54,15 @@ export function SponsorActions({ sponsor }: { sponsor: Sponsor }) {
           <input type="hidden" name="id" value={sponsor.id} />
           <button
             type="submit"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "4px",
-              backgroundColor: "rgba(215, 25, 32, 0.1)",
-              border: "1px solid rgba(215, 25, 32, 0.3)",
-              borderRadius: "6px",
-              padding: "6px 10px",
-              color: "#EF4444",
-              fontSize: "11px",
-              fontWeight: 600,
-              cursor: "pointer",
-              transition: "all 0.2s",
-            }}
-            title="Excluir Patrocinador"
+            disabled={isDemo}
+            className={`px-3 py-1.5 rounded text-xs font-semibold flex items-center gap-1.5 transition ${
+              isDemo
+                ? 'bg-neutral-900 text-neutral-600 border border-neutral-800 cursor-not-allowed opacity-50'
+                : 'border border-red-900/60 text-red-400 hover:bg-red-950/40'
+            }`}
+            title={isDemo ? "Modo demonstração: exclusão bloqueada" : "Excluir Patrocinador"}
           >
-            <Trash2 size={12} color="#D71920" />
+            <Trash2 size={12} />
             <span>Excluir</span>
           </button>
         </form>
